@@ -1,23 +1,22 @@
 #include "Logger.h"
 #include <cassert>
-#include <iostream>
 
 void testLogger() {
     Logger logger("test_log.txt", Theme::Standard);
 
-    // Проверка стандартной тематики
+    // РџСЂРѕРІРµСЂРєР° СЃС‚Р°РЅРґР°СЂС‚РЅРѕР№ С‚РµРјР°С‚РёРєРё
     logger.log("Test info message.", static_cast<int>(StandardLevel::Info));
     logger.log("Test warning message.", static_cast<int>(StandardLevel::Warning));
     logger.log("Test error message.", static_cast<int>(StandardLevel::Error));
 
-    // Проверка уровня по умолчанию (Unknown)
+    // РџСЂРѕРІРµСЂРєР° СѓСЂРѕРІРЅСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ (Unknown)
     logger.log("Test default level message.");
 
-    // Проверка изменения тематики
+    // РџСЂРѕРІРµСЂРєР° РёР·РјРµРЅРµРЅРёСЏ С‚РµРјР°С‚РёРєРё
     logger.setTheme(Theme::Nature);
     logger.log("Test breeze message.", static_cast<int>(NatureLevel::Breeze));
 
-    // Проверка изменения уровня по умолчанию
+    // РџСЂРѕРІРµСЂРєР° РёР·РјРµРЅРµРЅРёСЏ СѓСЂРѕРІРЅСЏ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     logger.setDefaultLevel(static_cast<int>(NatureLevel::Rain));
     logger.log("Test message with new default level.");
 
