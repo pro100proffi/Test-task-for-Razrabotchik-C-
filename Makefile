@@ -32,11 +32,7 @@ $(TARGET_APP): $(OBJS_APP) $(TARGET_LIB)
 $(TARGET_TEST): $(OBJS_TEST) $(TARGET_LIB)
 	$(CXX) $(CXXFLAGS) -o $(TARGET_TEST) $(OBJS_TEST) -L. -llogger
 
-# Запуск тестов
-test: $(TARGET_TEST)
-	./$(TARGET_TEST)
-
-# Компиляция исходных файлов библиотеки
+# Компиляция исходных файлов
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
