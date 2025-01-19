@@ -26,7 +26,7 @@ $(TARGET_LIB): $(OBJS_LIB)
 
 # Сборка приложения
 $(TARGET_APP): $(OBJS_APP) $(TARGET_LIB)
-	$(CXX) $(CXXFLAGS) -o $(TARGET_APP) $(OBJS_APP) -L. -llogger
+    $(CXX) $(CXXFLAGS) -o $(TARGET_APP) $(OBJS_APP) -L. -llogger -Wl,-rpath,.
 
 # Сборка тестов
 $(TARGET_TEST): $(OBJS_TEST) $(TARGET_LIB)
