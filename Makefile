@@ -1,9 +1,9 @@
-# Компилятор и флаги
+# РљРѕРјРїРёР»СЏС‚РѕСЂ Рё С„Р»Р°РіРё
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -fPIC
 LDFLAGS = -shared
 
-# Имена файлов
+# РРјРµРЅР° С„Р°Р№Р»РѕРІ
 TARGET_LIB = liblogger.so
 SRCS_LIB = Logger.cpp
 OBJS_LIB = $(SRCS_LIB:.cpp=.o)
@@ -12,31 +12,31 @@ TARGET_APP = logger_app
 SRCS_APP = main.cpp
 OBJS_APP = $(SRCS_APP:.cpp=.o)
 
-# Добавляем цель для тестов
+# Р”РѕР±Р°РІР»СЏРµРј С†РµР»СЊ РґР»СЏ С‚РµСЃС‚РѕРІ
 TARGET_TEST = logger_test
 SRCS_TEST = test.cpp
 OBJS_TEST = $(SRCS_TEST:.cpp=.o)
 
-# Цели по умолчанию
+# Р¦РµР»Рё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
 all: $(TARGET_LIB) $(TARGET_APP) $(TARGET_TEST)
 
-# Сборка динамической библиотеки
+# РЎР±РѕСЂРєР° РґРёРЅР°РјРёС‡РµСЃРєРѕР№ Р±РёР±Р»РёРѕС‚РµРєРё
 $(TARGET_LIB): $(OBJS_LIB)
 	$(CXX) $(LDFLAGS) -o $(TARGET_LIB) $(OBJS_LIB)
 
-# Сборка приложения
+# РЎР±РѕСЂРєР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 $(TARGET_APP): $(OBJS_APP) $(TARGET_LIB)
 	$(CXX) $(CXXFLAGS) -o $(TARGET_APP) $(OBJS_APP) -L. -llogger
 
-# Сборка тестов
+# РЎР±РѕСЂРєР° С‚РµСЃС‚РѕРІ
 $(TARGET_TEST): $(OBJS_TEST) $(TARGET_LIB)
 	$(CXX) $(CXXFLAGS) -o $(TARGET_TEST) $(OBJS_TEST) -L. -llogger
 
-# Компиляция исходных файлов
+# РљРѕРјРїРёР»СЏС†РёСЏ РёСЃС…РѕРґРЅС‹С… С„Р°Р№Р»РѕРІ
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Очистка
+# РћС‡РёСЃС‚РєР°
 clean:
 	rm -f $(OBJS_LIB) $(OBJS_APP) $(OBJS_TEST) $(TARGET_LIB) $(TARGET_APP) $(TARGET_TEST)
 
