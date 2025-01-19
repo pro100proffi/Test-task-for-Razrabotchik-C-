@@ -40,13 +40,14 @@ std::string Logger::getCurrentTime() {
     auto now = std::chrono::system_clock::now();
     std::time_t now_time = std::chrono::system_clock::to_time_t(now);
     std::tm now_tm;
-    localtime_s(&now_tm, &now_time);
+
+    // Используем localtime_r для Linux
+    localtime_r(&now_time, &now_tm);
 
     char buffer[80];
     std::strftime(buffer, sizeof(buffer), "%Y-%m-%d %H:%M:%S", &now_tm);
     return std::string(buffer);
 }
-
 
 std::string Logger::levelToString(int level) {
     switch (currentTheme) {
