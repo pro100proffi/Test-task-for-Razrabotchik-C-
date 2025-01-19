@@ -1,5 +1,6 @@
 #include "Logger.h"
 #include <cassert>
+#include <iostream>
 
 void testLogger() {
     Logger logger("test_log.txt", Theme::Standard);
