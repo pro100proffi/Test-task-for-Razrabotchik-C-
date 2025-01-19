@@ -2,12 +2,12 @@
 #include <iostream>
 #include <thread>
 #include <string>
-#include <cstdlib> // для getenv
+#include <cstdlib> // Г¤Г«Гї getenv
 
-// Функция для получения пути к папке "Документы"
-#include <cstdlib> // для _dupenv_s
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГЇГ®Г«ГіГ·ГҐГ­ГЁГї ГЇГіГІГЁ ГЄ ГЇГ ГЇГЄГҐ "Г„Г®ГЄГіГ¬ГҐГ­ГІГ»"
+#include <cstdlib> // Г¤Г«Гї _dupenv_s
 
-// Функция для получения пути к папке "Документы"
+// Г”ГіГ­ГЄГ¶ГЁГї Г¤Г«Гї ГЇГ®Г«ГіГ·ГҐГ­ГЁГї ГЇГіГІГЁ ГЄ ГЇГ ГЇГЄГҐ "Г„Г®ГЄГіГ¬ГҐГ­ГІГ»"
 std::string getDocumentsPath() {
     char* homeDir = nullptr;
     size_t len = 0;
@@ -17,7 +17,7 @@ std::string getDocumentsPath() {
         return "";
     }
     std::string documentsPath = std::string(homeDir) + "/Documents/log.txt";
-    free(homeDir); // Освобождаем выделенную память
+    free(homeDir); // ГЋГ±ГўГ®ГЎГ®Г¦Г¤Г ГҐГ¬ ГўГ»Г¤ГҐГ«ГҐГ­Г­ГіГѕ ГЇГ Г¬ГїГІГј
     return documentsPath;
 }
 
@@ -55,7 +55,7 @@ void logMessage(Logger& logger) {
     int level;
 
     std::cout << "\nEnter your message: ";
-    std::cin.ignore(); // Игнорируем предыдущий ввод
+    std::cin.ignore(); // Г€ГЈГ­Г®Г°ГЁГ°ГіГҐГ¬ ГЇГ°ГҐГ¤Г»Г¤ГіГ№ГЁГ© ГўГўГ®Г¤
     std::getline(std::cin, message);
 
     std::cout << "Enter log level (or -1 for default): ";
@@ -75,7 +75,7 @@ void changeDefaultLevel(Logger& logger) {
 }
 
 int main() {
-    // Получаем путь к папке "Документы"
+    // ГЏГ®Г«ГіГ·Г ГҐГ¬ ГЇГіГІГј ГЄ ГЇГ ГЇГЄГҐ "Г„Г®ГЄГіГ¬ГҐГ­ГІГ»"
     std::string logFilePath = getDocumentsPath();
     if (logFilePath.empty()) {
         std::cerr << "Failed to determine Documents folder path. Using current directory.\n";
