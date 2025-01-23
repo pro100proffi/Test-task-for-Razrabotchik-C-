@@ -33,14 +33,16 @@ void Logger::setLogFile(const std::string& filename) {
     logFilePath = filename;
     logFile.open(logFilePath, std::ios::out | std::ios::app);
     if (!logFile.is_open()) {
-        throw std::runtime_error("Could not open log file: " + logFilePath);
+        throw std::runtime_error("Could not open or create log file: " + logFilePath);
     }
+
+    std::cout << "Log file set to: " << logFilePath << "\n";
 }
 
 void Logger::log(const std::string& message, int level) {
     std::lock_guard<std::mutex> lock(logMutex);
 
-    // Если уровень не указан, используем уровень по умолчанию
+    // Г…Г±Г«ГЁ ГіГ°Г®ГўГҐГ­Гј Г­ГҐ ГіГЄГ Г§Г Г­, ГЁГ±ГЇГ®Г«ГјГ§ГіГҐГ¬ ГіГ°Г®ГўГҐГ­Гј ГЇГ® ГіГ¬Г®Г«Г·Г Г­ГЁГѕ
     int effectiveLevel = (level == -1) ? defaultLevel : level;
 
     logFile << "[" << getCurrentTime() << "] "
@@ -53,7 +55,7 @@ std::string Logger::getCurrentTime() {
     std::time_t now_time = std::chrono::system_clock::to_time_t(now);
     std::tm now_tm;
 
-    // Используем localtime_r для Linux
+    // Г€Г±ГЇГ®Г«ГјГ§ГіГҐГ¬ localtime_r Г¤Г«Гї Linux
     localtime_r(&now_time, &now_tm);
 
     char buffer[80];
