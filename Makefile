@@ -24,13 +24,13 @@ all: $(TARGET_LIB) $(TARGET_APP) $(TARGET_TEST)
 $(TARGET_LIB): $(OBJS_LIB)
 	$(CXX) $(LDFLAGS) -o $(TARGET_LIB) $(OBJS_LIB)
 
-# Сборка приложения с использованием rpath
+# Сборка приложения
 $(TARGET_APP): $(OBJS_APP) $(TARGET_LIB)
 	$(CXX) $(CXXFLAGS) -o $(TARGET_APP) $(OBJS_APP) -L. -llogger -Wl,-rpath,.
 
-# Сборка тестов с использованием rpath
-$(TARGET_TEST): $(OBJS_TEST) $(TARGET_LIB)
-	$(CXX) $(CXXFLAGS) -o $(TARGET_TEST) $(OBJS_TEST) -L. -llogger -Wl,-rpath,.
+# Сборка тестов
+$(TARGET_TEST): $(OBJS_TEST) $(OBJS_LIB)
+	$(CXX) $(CXXFLAGS) -o $(TARGET_TEST) $(OBJS_TEST) $(OBJS_LIB) -Wl,-rpath,.
 
 # Компиляция исходных файлов
 %.o: %.cpp
