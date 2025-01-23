@@ -1,8 +1,8 @@
 #include "Logger.h"
 #include <iostream>
 
-Logger::Logger(const std::string& filename, Theme theme)
-    : logFilePath(filename), currentTheme(theme), defaultLevel(0) {
+Logger::Logger(const std::string& filename, Theme theme, int defaultLevel)
+    : logFilePath(filename), currentTheme(theme), defaultLevel(defaultLevel) {
     logFile.open(logFilePath, std::ios::out | std::ios::app);
     if (!logFile.is_open()) {
         throw std::runtime_error("Could not open log file: " + logFilePath);
