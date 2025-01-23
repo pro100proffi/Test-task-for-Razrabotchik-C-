@@ -1,11 +1,11 @@
 #include "Logger.h"
 #include <iostream>
 
-Logger::Logger(const std::string& filename, Theme theme, int defaultLevel)
-    : currentTheme(theme), defaultLevel(defaultLevel) {
-    logFile.open(filename, std::ios::out | std::ios::app);
+Logger::Logger(const std::string& filename, Theme theme)
+    : logFilePath(filename), currentTheme(theme), defaultLevel(0) {
+    logFile.open(logFilePath, std::ios::out | std::ios::app);
     if (!logFile.is_open()) {
-        throw std::runtime_error("Could not open log file: " + filename);
+        throw std::runtime_error("Could not open log file: " + logFilePath);
     }
 }
 
@@ -23,6 +23,18 @@ void Logger::setTheme(Theme theme) {
 void Logger::setDefaultLevel(int level) {
     std::lock_guard<std::mutex> lock(logMutex);
     defaultLevel = level;
+}
+
+void Logger::setLogFile(const std::string& filename) {
+    std::lock_guard<std::mutex> lock(logMutex);
+    if (logFile.is_open()) {
+        logFile.close();
+    }
+    logFilePath = filename;
+    logFile.open(logFilePath, std::ios::out | std::ios::app);
+    if (!logFile.is_open()) {
+        throw std::runtime_error("Could not open log file: " + logFilePath);
+    }
 }
 
 void Logger::log(const std::string& message, int level) {
