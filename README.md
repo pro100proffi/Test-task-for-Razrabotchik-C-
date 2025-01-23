@@ -16,7 +16,7 @@ sudo apt update
 sudo apt install g++ make
 ```
 
-### Клонируйте репозиторий
+###Клонируйте репозиторий
 ```bash
 git clone https://github.com/ваш-username/ваш-репозиторий.git
 cd ваш-репозиторий
